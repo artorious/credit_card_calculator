@@ -9,34 +9,12 @@ The problem:
     paid on the credit card for a given credit card balance, interest rate 
     and monthly payment.  
 '''
-#### PROBLEM ANALYSIS
-# Factors that determine how quickly a loan is paid off :-
-    # Amount of the loan
-    # Interest Rate charged
-    # Monthly payments made (minimum payment 2%-3%  of the outstanding balance each month)
-    # Time to pay off the card by making minimum payments only
 
-##### PROGRAM DESIGN
-## Meeting Program requirements
-    # Output Display Format - Tabular
-    # Relevant Information - User Input 
-    # Time to pay off the loan - Compute & display
-    # Total interest paid - Compute & display
-    # Give user the choice to assume  the monthly payments to be the required-min or a larger specified amount
-
-## Data Description
-# All data that needs to be represented in the program are numerical values for:
-    # Loan amount
-    # Interest Rate
-    # Monthly payments made
-# No need to create a data structure as the table of payments can be generated as it is displayed
-
-## Algorithmic Approach
-# Calculation of the required minimum payment
-    # Minimun payment - 2% of the outstanding balance each month
-    # Lower limit of minimum payment - $20
-
-#########################  THE PROGRAM  #######################################
+# TODO: Formatting the Displayed Output
+    # Add input error checking. 
+    # Modifiy to allow the user to continue to enter various monthly payments for recalculating a given balance pay-off. 
+    # Add Output formatting to make the displayed information more readable. 
+    # Correct the display of a negative balance at the end of the payoff schedule.
 
 def display_welcome():
     '''Program Greeting'''
@@ -51,11 +29,28 @@ def display_payments(balance, int_rate, monthly_payment):
     '''Calculate and display the paydown of the balance as well
     as the interest paid over each month of the payoff period.  
     '''
-    print('\n.... Entering function display_payments')
-    print(format(' Applicaple Payments ', '|^80'))
-    print('Parameter balance = ', balance)
-    print('Parameter int_rate =', int_rate)
-    print('Paramter monthly_payment = ', monthly_payment)
+    # Init
+    num_months = 0 
+    total_int_paid = 0
+
+    # Display Loan Info
+    print(format(' PayOff Schedule ', '|^80'))
+    print()
+    print('Credit Card Balance: ${0:,.2f}'.format(balance))
+    print('Annual Interest Rate: {0}%'.format(str(1200 * int_rate)))
+    print('Monthly Payment: ${0:,.2f} '.format(monthly_payment))
+    print()
+    
+    # display year-by-year account status
+    while balance > 0: # Iterate
+        monthly_int = balance * int_rate
+        total_int_paid += monthly_int # Track  & update total interest paid
+        balance += monthly_int - monthly_payment
+
+        year = (num_months // 12) + 1
+        print('{0} {1:,.2f} {2:,.2f}'.format(year, balance, total_int_paid))
+        
+        num_months += 1   # Tarck & update number of months(lines) displayed
 
 # ---- Main
 
