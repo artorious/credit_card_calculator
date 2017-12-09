@@ -36,11 +36,44 @@ The problem:
     # Minimun payment - 2% of the outstanding balance each month
     # Lower limit of minimum payment - $20
 
+#########################  THE PROGRAM  #######################################
 
-#########################  OVERALL PROGRAM STEPS  #######################################
+def display_welcome():
+    '''Program Greeting'''
+    print('\n.... Entering function display welcome')
+    print(format(' Credit Card Calculation Program ', '|^80'))
+    
+def display_payments(balance, int_rate, monthly_payment):
+    '''Calculate and display the paydown of the balance as well
+    as the interest paid over each month of the payoff period.  
+    '''
+    print('\n.... Entering function display_payments')
+    print(format(' Applicaple Payments ', '|^80'))
+    print('Parameter balance = ', balance)
+    print('Parameter int_rate =', int_rate)
+    print('Paramter monthly_payment = ', monthly_payment)
 
-# Program Greeting
+# ---- Main
 
-# Get Card Balance, Annual Interest Rate, and Monthly payment - User Input
+# display welcome screen
+display_welcome()
 
-# Calculate and Display Payoff of Loan and Total Interest Paid
+# Get Card Balance, Annual Interest Rate (APR) 
+balance = int(input('\nEnter the balance on your credit card: '))
+apr = int(input('Enter the Annual interest rate (APR) on the card: '))
+monthly_int_rate = apr/1200  # Convert apr to monthly-int-rate and into decimal form
+
+# Determine Monthly payment - Give user the choice to assume the monthly 
+# payments to be the required-min or a larger specified amount
+response = input('Use the minimum monthly payment? (y/n): ')
+
+if response in ('y', 'Y'):
+    print(format(' Minimun payment Selected ', '|^80'))
+    monthly_payment = 20
+else:
+    print(format(' User-entered monthly payments selected ', '|^80'))
+    monthly_payment = int(input('Enter monthly payment: '))
+
+# Display monthly payoff
+display_payments(balance, monthly_int_rate, monthly_payment)
+
