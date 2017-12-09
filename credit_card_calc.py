@@ -40,9 +40,13 @@ The problem:
 
 def display_welcome():
     '''Program Greeting'''
-    print('\n.... Entering function display welcome')
     print(format(' Credit Card Calculation Program ', '|^80'))
-    
+    print()
+    print('This program will determine the time to pay off a credit')
+    print('card and the interest paid based on the current balance,')
+    print('the interest rate, and the monthly payments made.')
+    print()
+
 def display_payments(balance, int_rate, monthly_payment):
     '''Calculate and display the paydown of the balance as well
     as the interest paid over each month of the payoff period.  
@@ -68,10 +72,11 @@ monthly_int_rate = apr/1200  # Convert apr to monthly-int-rate and into decimal 
 response = input('Use the minimum monthly payment? (y/n): ')
 
 if response in ('y', 'Y'):
-    print(format(' Minimun payment Selected ', '|^80'))
-    monthly_payment = 20
+    if balance < 1000:
+        monthly_payment = 20
+    else:
+        monthly_payment = balance * .02
 else:
-    print(format(' User-entered monthly payments selected ', '|^80'))
     monthly_payment = int(input('Enter monthly payment: '))
 
 # Display monthly payoff
